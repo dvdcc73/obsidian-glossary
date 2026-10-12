@@ -1,0 +1,11 @@
+# ===== Obsidian =====
+# 工作区状态（开着哪些标签页），每次打开软件都变，是垃圾提交的元凶
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+
+# Obsidian 回收站
+.trash/
+
+# ===== 系统垃圾文件 =====
+Thumbs.db
+.DS_Store
