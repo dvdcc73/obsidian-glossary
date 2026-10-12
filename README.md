@@ -8,10 +8,6 @@ A self-updating glossary for your Obsidian lecture notes
 
 </div>
 
-
-![术语表效果预览](assets/功能预览图.png)
-
-
 ---
 
 写讲义笔记时，一个概念的定义往往散落在不同文档里，复习时全靠记忆和搜索碰运气。本项目提供一套**四个文件夹**的工作流：
