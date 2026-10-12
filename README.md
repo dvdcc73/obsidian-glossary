@@ -8,9 +8,9 @@ A self-updating glossary for your Obsidian lecture notes
 
 </div>
 
-<!-- 发布前：截一张术语表效果图放进 assets/ 文件夹，然后删掉下面两行的注释符号
+
 ![术语表效果预览](assets/功能预览图.png)
--->
+
 
 ---
 
