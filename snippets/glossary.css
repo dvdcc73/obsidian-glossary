@@ -1,0 +1,97 @@
+/* 术语表整体 */
+.glossary { margin: 1em 0; }
+.reference-heading h2 { font-size: 1.8em; margin-bottom: 0.3em; }
+.section-deck { color: var(--text-muted); font-size: 0.9em; margin-bottom: 1em; }
+
+/* 控件区域 */
+.gloss-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 12px;
+}
+.field span { display: block; font-size: 0.85em; color: var(--text-muted); margin-bottom: 4px; }
+#gloss-search {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid var(--background-modifier-border);
+    background: var(--background-primary);
+    color: var(--text-normal);
+    min-width: 250px;
+}
+.filter-bar { display: flex; flex-wrap: wrap; gap: 6px; }
+.filter {
+    padding: 6px 12px;
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 20px;
+    background: var(--background-primary);
+    cursor: pointer;
+    font-size: 0.85em;
+    transition: all 0.2s;
+}
+.filter.active {
+    background: var(--interactive-accent);
+    color: white;
+    border-color: var(--interactive-accent);
+}
+.result-count { font-size: 0.85em; color: var(--text-muted); margin-left: auto; }
+
+/* 表格 */
+.gloss-table-wrap { overflow-x: auto; }
+.gloss-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background: var(--background-primary);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    border-radius: 8px;
+    overflow: hidden;
+}
+.gloss-table th, .gloss-table td {
+    padding: 10px 15px;
+    border-bottom: 1px solid var(--background-modifier-border);
+    vertical-align: top;
+    text-align: left;
+}
+.gloss-table thead th {
+    background: var(--background-secondary-alt);
+    font-weight: 600;
+}
+.gloss-table tbody tr:hover { background: var(--background-modifier-hover); }
+.gloss-table td:first-child, .gloss-table th:first-child { font-weight: 500; }
+
+/* 术语名称栏 */
+.gloss-table th[scope="row"] span { display: block; font-size: 1.05em; }
+.gloss-table th[scope="row"] small { display: block; color: var(--text-muted); font-weight: 400; font-size: 0.85em; }
+.gloss-table th[scope="row"] em {
+    display: inline-block;
+    margin-top: 4px;
+    padding: 2px 8px;
+    background: var(--background-secondary);
+    border-radius: 12px;
+    font-style: normal;
+    font-size: 0.75em;
+    color: var(--text-muted);
+}
+
+/* 阅读定位链接 */
+.read-location {
+    text-decoration: none;
+    color: var(--interactive-accent);
+    white-space: nowrap;
+}
+.read-location:hover { text-decoration: underline; }
+
+/* 空结果 */
+.gloss-empty { color: var(--text-muted); font-size: 0.9em; margin-top: 10px; }
+
+/*双链也会显示为美观的链接样式*/
+.gloss-table td:last-child a {
+    text-decoration: none;
+    color: var(--interactive-accent);
+    white-space: nowrap;
+}
+.gloss-table td:last-child a:hover {
+    text-decoration: underline;
+}
