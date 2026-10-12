@@ -1,2 +1,121 @@
-# obsidian-glossary
-A self-updating glossary for Obsidian lecture notes | 在 Obsidian 里养一张会自己长大的术语表
+<div align="center">
+
+# Obsidian 讲义术语表
+
+**在 Obsidian 里养一张会自己长大的术语表**
+
+A self-updating glossary for your Obsidian lecture notes
+
+</div>
+
+<!-- 发布前：截一张术语表效果图放进 assets/ 文件夹，然后删掉下面两行的注释符号
+![术语表效果预览](assets/功能预览图.png)
+-->
+
+---
+
+写讲义笔记时，一个概念的定义往往散落在不同文档里，复习时全靠记忆和搜索碰运气。本项目提供一套**四个文件夹**的工作流：
+
+- 写讲义时，随手用 `[[双链]]` 引用一个概念；
+- 在术语库中，用统一的 frontmatter/笔记属性 维护它的定义、英文、分类与出处；
+- 术语表页面由 [Dataview](https://github.com/blacksmithgu/obsidian-dataview) 自动把所有术语卡汇聚成一张**可即时搜索、可按分类筛选**的总表。
+
+全程在 Obsidian 内完成，**不需要任何外部脚本**。
+
+## ✨ 功能
+
+- 🔍 **即输即搜**：同时匹配中文名、英文名、定义与语境
+- 🏷️ **分类筛选**：按钮式切换，分类自动从术语卡读取，新增分类零维护
+- 🔗 **阅读定位**：从表格一键跳回讲义出处或术语卡
+- 📋 **模板建卡**：新术语由模板生成，frontmatter 格式永远统一
+- 🧮 **结果计数**：实时显示当前筛选命中多少个概念
+
+## 📁 目录结构与工作流
+
+```text
+.
+├── 01-lecture notes/    # 讲义笔记（概念在这里被 [[双链]] 引用）
+├── 02-terms/       # 术语卡（一个概念一个文件）
+├── 03-glossary/    # 术语表（自动汇聚全部术语卡）
+├── 04-templates/   # 术语模板（frontmatter 骨架）
+└── snippets/       # 术语表样式
+```
+
+```text
+04-templates（模板）
+      │ 从模板新建
+      ▼
+02-terms（术语卡） ◄───[[双链]]引用─── 01-lecture notes（讲义）
+      │
+      │ dataviewjs 自动读取全部 frontmatter
+      ▼
+03-glossary（术语表）
+```
+
+## 🚀 快速开始
+
+**前置要求**：[Obsidian](https://obsidian.md)（免费）+ 2 个社区插件，全程约 5 分钟
+
+1. **下载并打开**
+   下载本仓库（绿色 Code 按钮 → Download ZIP）并解压；打开 Obsidian → **打开文件夹作为仓库**（Open folder as vault）→ 选择解压出的文件夹
+
+2. **安装 Dataview（术语表的引擎）**
+   - 设置 → 第三方插件 → 启用第三方插件（关闭安全模式）→ 浏览 → 搜索 **Dataview** → 安装并启用
+   - 设置 → Dataview → 打开 **Enable JavaScript Queries**（启用 JavaScript 查询）
+
+3. **启用表格样式**
+   将 `snippets/glossary.css` 复制到 `.obsidian/snippets/` 文件夹（没有就新建）→ 设置 → 外观 → CSS 代码段 → 点刷新图标 → 勾选 `glossary`
+
+4. **安装 Templater（新建术语用）**
+   - 设置 → 第三方插件 → 浏览 → 搜索 **Templater** → 安装并启用
+   - 设置 → 第三方插件 → Templater旁边三个小点 → 设置 → **Template folder location** 填 `04-templates`
+   - 推荐：打开 **Trigger Templater on new file creation**，再到 **Template matching mode** 旁边改选为 **Folder templates** → 下面**Folder templates**会被启用，点进去 → 新增映射 `02-terms` → `术语模板`——今后在 02-terms 里新建笔记，模板自动就位
+
+5. **验收**：打开 `03-glossary/术语与关键概念.md`——你应看到三个学科、十余个术语组成的总表；试试搜索「机器学习」，点一下「基础概念」分类按钮
+
+> ⚠️ 表格显示为一坨代码 = 第 2 步没做全；表格能用但没有样式 = 第 3 步没做全。
+
+## 📝 添加一个新术语
+
+1. 在 `02-terms` 中新建笔记，**文件名 = 术语名**（讲义里的 `[[双链]]` 靠文件名对应）
+   - 配置过第 4 步的 Folder templates → 模板已自动套上，直接填写即可
+   - 没配置（方法一） → 新建笔记 → 确保光标移到笔记内正在编辑，否则会报错 → 找到左边“<%”符号，选择 `术语模板` 即可。
+   - 没配置（方法二） → 命令面板（Ctrl/Cmd + P）→ 搜索 `Templater: Insert` → 选择 `术语模板`
+2. 填写 frontmatter：
+
+| 字段 | 说明 | 示例 |
+|---|---|---|
+| `term` | 术语中文名 | `大语言模型` |
+| `english` | 英文名或缩写 | `Large Language Model · LLM` |
+| `category` | 分类，术语表的筛选按钮按它自动生成 | `基础概念` |
+| `definition` | 一句话定义 | `在大规模语料上训练、能够处理和生成语言的模型。能力表现取决于训练、推理与工具条件。` |
+| `context` | 在本课程中的语境与理解提示 | `本讲主要讨论模型如何组织知识并进入实际任务。` |
+| `section_label` | 出处链接，列表形式，可写多项(记得换行） | `- "[[第一讲 · 为什么人工智能是一场技术革命]]"` |
+
+3. 在讲义中用 `[[术语名]]` 引用它；
+4. 打开术语表——新术语已经自己长出来了。
+
+## ⚙️ 自定义
+
+| 想改什么 | 在哪改 |
+|---|---|
+| 术语文件夹路径 | `术语与关键概念.md` 第一行：`dv.pages('"02-terms"')` |
+| 分类 | 不用改代码，在术语卡的 `category` 里直接写新分类即可 |
+| 表格列与搜索范围 | `术语与关键概念.md` 中的 `renderTable()` 函数 |
+
+## 🤖 AI 辅助声明
+
+本项目在开发过程中使用了 AI 编程助手（DeepSeek-V4-Pro / GLM-5.3）：
+
+- 工作流设计、功能需求与验收由作者完成；
+- `03-glossary` 的 dataviewjs 代码与配套 CSS 由 AI 生成初稿，作者通过多轮「运行 → 对照预期 → 反馈调整」完成调试与验收；
+- `01-lecture notes` 与 `02-terms` 中的示例讲义与术语为 AI 辅助生成、作者逐条审阅校订，仅用于演示工作流，不构成权威学习材料；
+- 代码按仓库许可证提供，使用前请自行测试。
+
+## 📄 许可证
+
+[MIT](LICENSE)
+
+## 💬 反馈
+
+发现 bug 或有改进建议，欢迎提交 [Issue](https://github.com/你的用户名/仓库名/issues)。如果对你有帮助，欢迎点个 Star ⭐
